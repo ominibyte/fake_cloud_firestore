@@ -1,7 +1,6 @@
 import 'package:clock/clock.dart';
 import 'package:cloud_firestore_platform_interface/cloud_firestore_platform_interface.dart';
 import 'package:fake_cloud_firestore/src/util.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
 abstract class FakeFieldValue {
   const FakeFieldValue();
@@ -99,15 +98,10 @@ class FieldValueArrayRemove extends FakeFieldValue {
 }
 
 // Mock implementation of a FieldValue. We store values as a simple string.
-class MockFieldValuePlatform
-    with
-        // ignore: invalid_use_of_visible_for_testing_member
-        MockPlatformInterfaceMixin
-    implements
-        FieldValuePlatform {
+class MockFieldValuePlatform extends FieldValuePlatform {
   final FakeFieldValue value;
 
-  MockFieldValuePlatform(this.value);
+  MockFieldValuePlatform(this.value) : super(null);
 
   @override
   bool operator ==(Object other) =>
